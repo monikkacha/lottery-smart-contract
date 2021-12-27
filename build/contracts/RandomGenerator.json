@@ -1,0 +1,468 @@
+{
+  "contractName": "RandomGenerator",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "requestId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "randomness",
+          "type": "uint256"
+        }
+      ],
+      "name": "rawFulfillRandomness",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.10+commit.fc410830\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"requestId\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"randomness\",\"type\":\"uint256\"}],\"name\":\"rawFulfillRandomness\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/RandomGenerator.sol\":\"RandomGenerator\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/RandomGenerator.sol\":{\"keccak256\":\"0xe5d4d3813472b157a41410cf06aff384bb6e4e5180b3fff0cf0c19b0fda0a8b5\",\"urls\":[\"bzz-raw://cc2bcc7bc6fd125ecc9acaad1fa5ca87341fc69817d640ce02db735dea1a0b63\",\"dweb:/ipfs/QmRwTztpJKgPZWgYSgtX6qk9HAcmn9tSCJ9p24dH8C17gu\"]},\"project:/node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBase.sol\":{\"keccak256\":\"0x778c9d88cd6d94ae866c1c3f5fec6022f07e39280d3b6d581c8cceb8a5ac4b1e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a2fe7cac98f6c86e4e3ef299bb91f3917d4171548e39da72c7da392c9d5d5815\",\"dweb:/ipfs/QmT8jh2DR1VU8554hGMbjX6BkACT96FZBETbN5KkStBvYP\"]},\"project:/node_modules/@chainlink/contracts/src/v0.8/VRFRequestIDBase.sol\":{\"keccak256\":\"0x2bf1168e8fe548fa990e0aeaf89ef90680f80aa31eeaf901f485df60de51d51b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://79c72d66deaa4b0f251f3f0817f45ebceb71f5b4f94a86ac0e586de99f5af2b6\",\"dweb:/ipfs/QmcHkApHm5CAynjajcCUYppaKJ9sNWGZTEcSs4tUK8B5K5\"]},\"project:/node_modules/@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol\":{\"keccak256\":\"0xc7d7cd730d36825485ef4107d93c3ff18b9f3a5a00ea3d5988ba9a0bd70b10c5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8cb1064885ecbcd9c3adba779e190cb4a538e5d4d15aeccb67d3376bdffc94bd\",\"dweb:/ipfs/QmcQHK6ewve7tFi4XXK65JthQg4kQzApQikWcURJjGt4iQ\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.8.10;\n\nimport \"../node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBase.sol\";\n\nabstract contract RandomGenerator is VRFConsumerBase {\n    constructor(address _vrfCoordinator, address _link)\n        VRFConsumerBase(_vrfCoordinator, _link)\n    {}\n}\n",
+  "sourcePath": "/Users/monikkacha/Developer/web/blockchain/lottery/contracts/RandomGenerator.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/RandomGenerator.sol",
+    "exportedSymbols": {
+      "LinkTokenInterface": [
+        397
+      ],
+      "RandomGenerator": [
+        131
+      ],
+      "VRFConsumerBase": [
+        252
+      ],
+      "VRFRequestIDBase": [
+        302
+      ]
+    },
+    "id": 132,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 115,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "absolutePath": "project:/node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBase.sol",
+        "file": "../node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBase.sol",
+        "id": 116,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 132,
+        "sourceUnit": 253,
+        "src": "26:75:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 117,
+              "name": "VRFConsumerBase",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 252,
+              "src": "140:15:2"
+            },
+            "id": 118,
+            "nodeType": "InheritanceSpecifier",
+            "src": "140:15:2"
+          }
+        ],
+        "canonicalName": "RandomGenerator",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": false,
+        "id": 131,
+        "linearizedBaseContracts": [
+          131,
+          252,
+          302
+        ],
+        "name": "RandomGenerator",
+        "nameLocation": "121:15:2",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 129,
+              "nodeType": "Block",
+              "src": "266:2:2",
+              "statements": []
+            },
+            "id": 130,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "id": 125,
+                    "name": "_vrfCoordinator",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 120,
+                    "src": "238:15:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  {
+                    "id": 126,
+                    "name": "_link",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 122,
+                    "src": "255:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 127,
+                "kind": "baseConstructorSpecifier",
+                "modifierName": {
+                  "id": 124,
+                  "name": "VRFConsumerBase",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 252,
+                  "src": "222:15:2"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "222:39:2"
+              }
+            ],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 123,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 120,
+                  "mutability": "mutable",
+                  "name": "_vrfCoordinator",
+                  "nameLocation": "182:15:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 130,
+                  "src": "174:23:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 119,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "174:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 122,
+                  "mutability": "mutable",
+                  "name": "_link",
+                  "nameLocation": "207:5:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 130,
+                  "src": "199:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 121,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "199:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "173:40:2"
+            },
+            "returnParameters": {
+              "id": 128,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "266:0:2"
+            },
+            "scope": 131,
+            "src": "162:106:2",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 132,
+        "src": "103:167:2",
+        "usedErrors": []
+      }
+    ],
+    "src": "0:271:2"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/RandomGenerator.sol",
+    "exportedSymbols": {
+      "LinkTokenInterface": [
+        397
+      ],
+      "RandomGenerator": [
+        131
+      ],
+      "VRFConsumerBase": [
+        252
+      ],
+      "VRFRequestIDBase": [
+        302
+      ]
+    },
+    "id": 132,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 115,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "absolutePath": "project:/node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBase.sol",
+        "file": "../node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBase.sol",
+        "id": 116,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 132,
+        "sourceUnit": 253,
+        "src": "26:75:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 117,
+              "name": "VRFConsumerBase",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 252,
+              "src": "140:15:2"
+            },
+            "id": 118,
+            "nodeType": "InheritanceSpecifier",
+            "src": "140:15:2"
+          }
+        ],
+        "canonicalName": "RandomGenerator",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": false,
+        "id": 131,
+        "linearizedBaseContracts": [
+          131,
+          252,
+          302
+        ],
+        "name": "RandomGenerator",
+        "nameLocation": "121:15:2",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 129,
+              "nodeType": "Block",
+              "src": "266:2:2",
+              "statements": []
+            },
+            "id": 130,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "id": 125,
+                    "name": "_vrfCoordinator",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 120,
+                    "src": "238:15:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  {
+                    "id": 126,
+                    "name": "_link",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 122,
+                    "src": "255:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 127,
+                "kind": "baseConstructorSpecifier",
+                "modifierName": {
+                  "id": 124,
+                  "name": "VRFConsumerBase",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 252,
+                  "src": "222:15:2"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "222:39:2"
+              }
+            ],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 123,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 120,
+                  "mutability": "mutable",
+                  "name": "_vrfCoordinator",
+                  "nameLocation": "182:15:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 130,
+                  "src": "174:23:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 119,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "174:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 122,
+                  "mutability": "mutable",
+                  "name": "_link",
+                  "nameLocation": "207:5:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 130,
+                  "src": "199:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 121,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "199:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "173:40:2"
+            },
+            "returnParameters": {
+              "id": 128,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "266:0:2"
+            },
+            "scope": 131,
+            "src": "162:106:2",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 132,
+        "src": "103:167:2",
+        "usedErrors": []
+      }
+    ],
+    "src": "0:271:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.10+commit.fc410830.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2021-12-27T14:53:26.797Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
