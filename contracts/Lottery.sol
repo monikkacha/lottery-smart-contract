@@ -35,12 +35,54 @@ contract Lottery is Ownable {
         _;
     }
 
-    // function submitNumber (uint _number) public payable isState (LotteryState.Open) {
-    //     require(msg.value >= entryFee , "Minimum entry fee required");
-    //     require(entries[_number].add(msg.sender), "Can not submit the number more than once");
-    //     numbers.push(_number)
-    //     numberOfEnteries++;
-    //     payable(owner()).transfer(ownerCut)
-    //     emit NewEntry(msg.sender , _number);
-    // }
+    constructor(
+        uint256 _entryFee,
+        uint256 _ownerCut,
+        address _randomNumberGenerator
+    ) public Ownable() {
+        require(_entryFee > 0, "Entry fee must be greater than 0");
+        require(
+            _entryFee > _ownerCut,
+            "Entry fee must be greater than owner cut"
+        );
+        entryFee = _entryFee;
+        ownerCut = _ownerCut;
+        _changeState(LotteryState.Open);
+    }
+
+    function submitNumber(uint256 _number)
+        public
+        payable
+        isState(LotteryState.Open)
+    {
+        require(msg.value >= entryFee, "Minimum entry fee required");
+        require(
+            entries[_number].add(msg.sender),
+            "Can not submit the same number more than once"
+        );
+        numbers.push(_number);
+        numberOfEntries++;
+        payable(owner()).transfer(ownerCut);
+        emit NewEntry(msg.sender, _number);
+    }
+
+    function drawNumber(uint256 _seed)
+        public
+        onlyOwner
+        isState(LotteryState.Open)
+    {
+        _changeState(LotteryState.Closed);
+    }
+
+    function _changeState(LotteryState _newState) private {
+        state = _newState;
+        emit LotteryStateChanged(state);
+    }
+
+    function random() public view returns (uint256) {
+        return
+            uint256(
+                keccak256(abi.encodePacked(block.difficulty, block.timestamp))
+            );
+    }
 }

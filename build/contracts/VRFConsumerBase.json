@@ -34,21 +34,21 @@
     "absolutePath": "project:/node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBase.sol",
     "exportedSymbols": {
       "LinkTokenInterface": [
-        397
+        418
       ],
       "VRFConsumerBase": [
-        252
+        273
       ],
       "VRFRequestIDBase": [
-        302
+        323
       ]
     },
-    "id": 253,
+    "id": 274,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 133,
+        "id": 154,
         "literals": [
           "solidity",
           "^",
@@ -61,11 +61,11 @@
       {
         "absolutePath": "project:/node_modules/@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol",
         "file": "./interfaces/LinkTokenInterface.sol",
-        "id": 134,
+        "id": 155,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 253,
-        "sourceUnit": 398,
+        "scope": 274,
+        "sourceUnit": 419,
         "src": "57:45:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -73,11 +73,11 @@
       {
         "absolutePath": "project:/node_modules/@chainlink/contracts/src/v0.8/VRFRequestIDBase.sol",
         "file": "./VRFRequestIDBase.sol",
-        "id": 135,
+        "id": 156,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 253,
-        "sourceUnit": 303,
+        "scope": 274,
+        "sourceUnit": 324,
         "src": "104:32:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -87,13 +87,13 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 137,
+              "id": 158,
               "name": "VRFRequestIDBase",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 302,
+              "referencedDeclaration": 323,
               "src": "5396:16:3"
             },
-            "id": 138,
+            "id": 159,
             "nodeType": "InheritanceSpecifier",
             "src": "5396:16:3"
           }
@@ -102,16 +102,16 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "documentation": {
-          "id": 136,
+          "id": 157,
           "nodeType": "StructuredDocumentation",
           "src": "138:5220:3",
           "text": "****************************************************************************\n @notice Interface for contracts using VRF randomness\n *****************************************************************************\n @dev PURPOSE\n @dev Reggie the Random Oracle (not his real job) wants to provide randomness\n @dev to Vera the verifier in such a way that Vera can be sure he's not\n @dev making his output up to suit himself. Reggie provides Vera a public key\n @dev to which he knows the secret key. Each time Vera provides a seed to\n @dev Reggie, he gives back a value which is computed completely\n @dev deterministically from the seed and the secret key.\n @dev Reggie provides a proof by which Vera can verify that the output was\n @dev correctly computed once Reggie tells it to her, but without that proof,\n @dev the output is indistinguishable to her from a uniform random sample\n @dev from the output space.\n @dev The purpose of this contract is to make it easy for unrelated contracts\n @dev to talk to Vera the verifier about the work Reggie is doing, to provide\n @dev simple access to a verifiable source of randomness.\n *****************************************************************************\n @dev USAGE\n @dev Calling contracts must inherit from VRFConsumerBase, and can\n @dev initialize VRFConsumerBase's attributes in their constructor as\n @dev shown:\n @dev   contract VRFConsumer {\n @dev     constuctor(<other arguments>, address _vrfCoordinator, address _link)\n @dev       VRFConsumerBase(_vrfCoordinator, _link) public {\n @dev         <initialization with other arguments goes here>\n @dev       }\n @dev   }\n @dev The oracle will have given you an ID for the VRF keypair they have\n @dev committed to (let's call it keyHash), and have told you the minimum LINK\n @dev price for VRF service. Make sure your contract has sufficient LINK, and\n @dev call requestRandomness(keyHash, fee, seed), where seed is the input you\n @dev want to generate randomness from.\n @dev Once the VRFCoordinator has received and validated the oracle's response\n @dev to your request, it will call your contract's fulfillRandomness method.\n @dev The randomness argument to fulfillRandomness is the actual random value\n @dev generated from your seed.\n @dev The requestId argument is generated from the keyHash and the seed by\n @dev makeRequestId(keyHash, seed). If your contract could have concurrent\n @dev requests open, you can use the requestId to track which seed is\n @dev associated with which randomness. See VRFRequestIDBase.sol for more\n @dev details. (See \"SECURITY CONSIDERATIONS\" for principles to keep in mind,\n @dev if your contract could have multiple requests in flight simultaneously.)\n @dev Colliding `requestId`s are cryptographically impossible as long as seeds\n @dev differ. (Which is critical to making unpredictable randomness! See the\n @dev next section.)\n *****************************************************************************\n @dev SECURITY CONSIDERATIONS\n @dev A method with the ability to call your fulfillRandomness method directly\n @dev could spoof a VRF response with any random value, so it's critical that\n @dev it cannot be directly called by anything other than this base contract\n @dev (specifically, by the VRFConsumerBase.rawFulfillRandomness method).\n @dev For your users to trust that your contract's random behavior is free\n @dev from malicious interference, it's best if you can write it so that all\n @dev behaviors implied by a VRF response are executed *during* your\n @dev fulfillRandomness method. If your contract must store the response (or\n @dev anything derived from it) and use it later, you must ensure that any\n @dev user-significant behavior which depends on that stored value cannot be\n @dev manipulated by a subsequent VRF request.\n @dev Similarly, both miners and the VRF oracle itself have some influence\n @dev over the order in which VRF responses appear on the blockchain, so if\n @dev your contract could have multiple VRF requests in flight simultaneously,\n @dev you must ensure that the order in which the VRF responses arrive cannot\n @dev be used to manipulate your contract's user-significant behavior.\n @dev Since the ultimate input to the VRF is mixed with the block hash of the\n @dev block in which the request is made, user-provided seeds have no impact\n @dev on its economic security properties. They are only included for API\n @dev compatability with previous versions of this contract.\n @dev Since the block hash of the block which contains the requestRandomness\n @dev call is mixed into the input to the VRF *last*, a sufficiently powerful\n @dev miner could, in principle, fork the blockchain to evict the block\n @dev containing the request, forcing the request to be included in a\n @dev different block with a different hash, and therefore a different input\n @dev to the VRF. However, such an attack would incur a substantial economic\n @dev cost. This cost scales with the number of blocks the VRF oracle waits\n @dev until it calls responds to a request."
         },
         "fullyImplemented": false,
-        "id": 252,
+        "id": 273,
         "linearizedBaseContracts": [
-          252,
-          302
+          273,
+          323
         ],
         "name": "VRFConsumerBase",
         "nameLocation": "5377:15:3",
@@ -119,12 +119,12 @@
         "nodes": [
           {
             "documentation": {
-              "id": 139,
+              "id": 160,
               "nodeType": "StructuredDocumentation",
               "src": "5417:641:3",
               "text": " @notice fulfillRandomness handles the VRF response. Your contract must\n @notice implement it. See \"SECURITY CONSIDERATIONS\" above for important\n @notice principles to keep in mind when implementing your fulfillRandomness\n @notice method.\n @dev VRFConsumerBase expects its subcontracts to have a method with this\n @dev signature, and will call it once it has verified the proof\n @dev associated with the randomness. (It is triggered via a call to\n @dev rawFulfillRandomness, below.)\n @param requestId The Id initially returned by requestRandomness\n @param randomness the VRF output"
             },
-            "id": 146,
+            "id": 167,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -132,17 +132,17 @@
             "nameLocation": "6070:17:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 144,
+              "id": 165,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 141,
+                  "id": 162,
                   "mutability": "mutable",
                   "name": "requestId",
                   "nameLocation": "6096:9:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 146,
+                  "scope": 167,
                   "src": "6088:17:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -151,7 +151,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 140,
+                    "id": 161,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "6088:7:3",
@@ -164,12 +164,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 143,
+                  "id": 164,
                   "mutability": "mutable",
                   "name": "randomness",
                   "nameLocation": "6115:10:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 146,
+                  "scope": 167,
                   "src": "6107:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -178,7 +178,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 142,
+                    "id": 163,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "6107:7:3",
@@ -193,12 +193,12 @@
               "src": "6087:39:3"
             },
             "returnParameters": {
-              "id": 145,
+              "id": 166,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "6143:0:3"
             },
-            "scope": 252,
+            "scope": 273,
             "src": "6061:83:3",
             "stateMutability": "nonpayable",
             "virtual": true,
@@ -207,17 +207,17 @@
           {
             "constant": true,
             "documentation": {
-              "id": 147,
+              "id": 168,
               "nodeType": "StructuredDocumentation",
               "src": "6148:388:3",
               "text": " @dev In order to keep backwards compatibility we have kept the user\n seed field around. We remove the use of it because given that the blockhash\n enters later, it overrides whatever randomness the used seed provides.\n Given that it adds no security, and can easily lead to misunderstandings,\n we have removed it from usage and can now provide a simpler API."
             },
-            "id": 150,
+            "id": 171,
             "mutability": "constant",
             "name": "USER_SEED_PLACEHOLDER",
             "nameLocation": "6564:21:3",
             "nodeType": "VariableDeclaration",
-            "scope": 252,
+            "scope": 273,
             "src": "6539:50:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -226,7 +226,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 148,
+              "id": 169,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "6539:7:3",
@@ -237,7 +237,7 @@
             },
             "value": {
               "hexValue": "30",
-              "id": 149,
+              "id": 170,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -255,7 +255,7 @@
           },
           {
             "body": {
-              "id": 201,
+              "id": 222,
               "nodeType": "Block",
               "src": "7827:924:3",
               "statements": [
@@ -263,11 +263,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 163,
+                        "id": 184,
                         "name": "vrfCoordinator",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 207,
+                        "referencedDeclaration": 228,
                         "src": "7854:14:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -275,11 +275,11 @@
                         }
                       },
                       {
-                        "id": 164,
+                        "id": 185,
                         "name": "_fee",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 155,
+                        "referencedDeclaration": 176,
                         "src": "7870:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -289,11 +289,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 167,
+                            "id": 188,
                             "name": "_keyHash",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 153,
+                            "referencedDeclaration": 174,
                             "src": "7887:8:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes32",
@@ -301,11 +301,11 @@
                             }
                           },
                           {
-                            "id": 168,
+                            "id": 189,
                             "name": "USER_SEED_PLACEHOLDER",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 150,
+                            "referencedDeclaration": 171,
                             "src": "7897:21:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -325,7 +325,7 @@
                             }
                           ],
                           "expression": {
-                            "id": 165,
+                            "id": 186,
                             "name": "abi",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -336,7 +336,7 @@
                               "typeString": "abi"
                             }
                           },
-                          "id": 166,
+                          "id": 187,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -349,7 +349,7 @@
                             "typeString": "function () pure returns (bytes memory)"
                           }
                         },
-                        "id": 169,
+                        "id": 190,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -381,32 +381,32 @@
                         }
                       ],
                       "expression": {
-                        "id": 160,
+                        "id": 181,
                         "name": "LINK",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 205,
+                        "referencedDeclaration": 226,
                         "src": "7833:4:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+                          "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
                           "typeString": "contract LinkTokenInterface"
                         }
                       },
-                      "id": 162,
+                      "id": 183,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "transferAndCall",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 385,
+                      "referencedDeclaration": 406,
                       "src": "7833:20:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$_t_bytes_memory_ptr_$returns$_t_bool_$",
                         "typeString": "function (address,uint256,bytes memory) external returns (bool)"
                       }
                     },
-                    "id": 170,
+                    "id": 191,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -421,23 +421,23 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 171,
+                  "id": 192,
                   "nodeType": "ExpressionStatement",
                   "src": "7833:87:3"
                 },
                 {
                   "assignments": [
-                    173
+                    194
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 173,
+                      "id": 194,
                       "mutability": "mutable",
                       "name": "vRFSeed",
                       "nameLocation": "8159:7:3",
                       "nodeType": "VariableDeclaration",
-                      "scope": 201,
+                      "scope": 222,
                       "src": "8151:15:3",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -446,7 +446,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 172,
+                        "id": 193,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "8151:7:3",
@@ -458,15 +458,15 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 185,
+                  "id": 206,
                   "initialValue": {
                     "arguments": [
                       {
-                        "id": 175,
+                        "id": 196,
                         "name": "_keyHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 153,
+                        "referencedDeclaration": 174,
                         "src": "8186:8:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -474,11 +474,11 @@
                         }
                       },
                       {
-                        "id": 176,
+                        "id": 197,
                         "name": "USER_SEED_PLACEHOLDER",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 150,
+                        "referencedDeclaration": 171,
                         "src": "8196:21:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -488,14 +488,14 @@
                       {
                         "arguments": [
                           {
-                            "id": 179,
+                            "id": 200,
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 4294967268,
                             "src": "8227:4:3",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_VRFConsumerBase_$252",
+                              "typeIdentifier": "t_contract$_VRFConsumerBase_$273",
                               "typeString": "contract VRFConsumerBase"
                             }
                           }
@@ -503,11 +503,11 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_VRFConsumerBase_$252",
+                              "typeIdentifier": "t_contract$_VRFConsumerBase_$273",
                               "typeString": "contract VRFConsumerBase"
                             }
                           ],
-                          "id": 178,
+                          "id": 199,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -519,14 +519,14 @@
                             "typeString": "type(address)"
                           },
                           "typeName": {
-                            "id": 177,
+                            "id": 198,
                             "name": "address",
                             "nodeType": "ElementaryTypeName",
                             "src": "8219:7:3",
                             "typeDescriptions": {}
                           }
                         },
-                        "id": 180,
+                        "id": 201,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -543,24 +543,24 @@
                       },
                       {
                         "baseExpression": {
-                          "id": 181,
+                          "id": 202,
                           "name": "nonces",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 211,
+                          "referencedDeclaration": 232,
                           "src": "8234:6:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_mapping$_t_bytes32_$_t_uint256_$",
                             "typeString": "mapping(bytes32 => uint256)"
                           }
                         },
-                        "id": 183,
+                        "id": 204,
                         "indexExpression": {
-                          "id": 182,
+                          "id": 203,
                           "name": "_keyHash",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 153,
+                          "referencedDeclaration": 174,
                           "src": "8241:8:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes32",
@@ -598,18 +598,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 174,
+                      "id": 195,
                       "name": "makeVRFInputSeed",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 282,
+                      "referencedDeclaration": 303,
                       "src": "8169:16:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_bytes32_$_t_uint256_$_t_address_$_t_uint256_$returns$_t_uint256_$",
                         "typeString": "function (bytes32,uint256,address,uint256) pure returns (uint256)"
                       }
                     },
-                    "id": 184,
+                    "id": 205,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -629,31 +629,31 @@
                 },
                 {
                   "expression": {
-                    "id": 194,
+                    "id": 215,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 186,
+                        "id": 207,
                         "name": "nonces",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 211,
+                        "referencedDeclaration": 232,
                         "src": "8662:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_bytes32_$_t_uint256_$",
                           "typeString": "mapping(bytes32 => uint256)"
                         }
                       },
-                      "id": 188,
+                      "id": 209,
                       "indexExpression": {
-                        "id": 187,
+                        "id": 208,
                         "name": "_keyHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 153,
+                        "referencedDeclaration": 174,
                         "src": "8669:8:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -678,31 +678,31 @@
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       },
-                      "id": 193,
+                      "id": 214,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "leftExpression": {
                         "baseExpression": {
-                          "id": 189,
+                          "id": 210,
                           "name": "nonces",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 211,
+                          "referencedDeclaration": 232,
                           "src": "8681:6:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_mapping$_t_bytes32_$_t_uint256_$",
                             "typeString": "mapping(bytes32 => uint256)"
                           }
                         },
-                        "id": 191,
+                        "id": 212,
                         "indexExpression": {
-                          "id": 190,
+                          "id": 211,
                           "name": "_keyHash",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 153,
+                          "referencedDeclaration": 174,
                           "src": "8688:8:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes32",
@@ -724,7 +724,7 @@
                       "operator": "+",
                       "rightExpression": {
                         "hexValue": "31",
-                        "id": 192,
+                        "id": 213,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -750,7 +750,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 195,
+                  "id": 216,
                   "nodeType": "ExpressionStatement",
                   "src": "8662:39:3"
                 },
@@ -758,11 +758,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 197,
+                        "id": 218,
                         "name": "_keyHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 153,
+                        "referencedDeclaration": 174,
                         "src": "8728:8:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -770,11 +770,11 @@
                         }
                       },
                       {
-                        "id": 198,
+                        "id": 219,
                         "name": "vRFSeed",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 173,
+                        "referencedDeclaration": 194,
                         "src": "8738:7:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -793,18 +793,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 196,
+                      "id": 217,
                       "name": "makeRequestId",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 301,
+                      "referencedDeclaration": 322,
                       "src": "8714:13:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_bytes32_$_t_uint256_$returns$_t_bytes32_$",
                         "typeString": "function (bytes32,uint256) pure returns (bytes32)"
                       }
                     },
-                    "id": 199,
+                    "id": 220,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -819,20 +819,20 @@
                       "typeString": "bytes32"
                     }
                   },
-                  "functionReturnParameters": 159,
-                  "id": 200,
+                  "functionReturnParameters": 180,
+                  "id": 221,
                   "nodeType": "Return",
                   "src": "8707:39:3"
                 }
               ]
             },
             "documentation": {
-              "id": 151,
+              "id": 172,
               "nodeType": "StructuredDocumentation",
               "src": "6594:1134:3",
               "text": " @notice requestRandomness initiates a request for VRF output given _seed\n @dev The fulfillRandomness method receives the output, once it's provided\n @dev by the Oracle, and verified by the vrfCoordinator.\n @dev The _keyHash must already be registered with the VRFCoordinator, and\n @dev the _fee must exceed the fee specified during registration of the\n @dev _keyHash.\n @dev The _seed parameter is vestigial, and is kept only for API\n @dev compatibility with older versions. It can't *hurt* to mix in some of\n @dev your own randomness, here, but it's not necessary because the VRF\n @dev oracle will mix the hash of the block containing your request into the\n @dev VRF seed it ultimately uses.\n @param _keyHash ID of public key against which randomness is generated\n @param _fee The amount of LINK to send with the request\n @return requestId unique ID for this request\n @dev The returned requestId can be used to distinguish responses to\n @dev concurrent requests. It is passed as the first argument to\n @dev fulfillRandomness."
             },
-            "id": 202,
+            "id": 223,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -840,17 +840,17 @@
             "nameLocation": "7740:17:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 156,
+              "id": 177,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 153,
+                  "id": 174,
                   "mutability": "mutable",
                   "name": "_keyHash",
                   "nameLocation": "7766:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 202,
+                  "scope": 223,
                   "src": "7758:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -859,7 +859,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 152,
+                    "id": 173,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "7758:7:3",
@@ -872,12 +872,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 155,
+                  "id": 176,
                   "mutability": "mutable",
                   "name": "_fee",
                   "nameLocation": "7784:4:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 202,
+                  "scope": 223,
                   "src": "7776:12:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -886,7 +886,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 154,
+                    "id": 175,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "7776:7:3",
@@ -901,17 +901,17 @@
               "src": "7757:32:3"
             },
             "returnParameters": {
-              "id": 159,
+              "id": 180,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 158,
+                  "id": 179,
                   "mutability": "mutable",
                   "name": "requestId",
                   "nameLocation": "7816:9:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 202,
+                  "scope": 223,
                   "src": "7808:17:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -920,7 +920,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 157,
+                    "id": 178,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "7808:7:3",
@@ -934,7 +934,7 @@
               ],
               "src": "7807:19:3"
             },
-            "scope": 252,
+            "scope": 273,
             "src": "7731:1020:3",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -942,33 +942,33 @@
           },
           {
             "constant": false,
-            "id": 205,
+            "id": 226,
             "mutability": "immutable",
             "name": "LINK",
             "nameLocation": "8793:4:3",
             "nodeType": "VariableDeclaration",
-            "scope": 252,
+            "scope": 273,
             "src": "8755:42:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+              "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
               "typeString": "contract LinkTokenInterface"
             },
             "typeName": {
-              "id": 204,
+              "id": 225,
               "nodeType": "UserDefinedTypeName",
               "pathNode": {
-                "id": 203,
+                "id": 224,
                 "name": "LinkTokenInterface",
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 397,
+                "referencedDeclaration": 418,
                 "src": "8755:18:3"
               },
-              "referencedDeclaration": 397,
+              "referencedDeclaration": 418,
               "src": "8755:18:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+                "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
                 "typeString": "contract LinkTokenInterface"
               }
             },
@@ -976,12 +976,12 @@
           },
           {
             "constant": false,
-            "id": 207,
+            "id": 228,
             "mutability": "immutable",
             "name": "vrfCoordinator",
             "nameLocation": "8827:14:3",
             "nodeType": "VariableDeclaration",
-            "scope": 252,
+            "scope": 273,
             "src": "8801:40:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -990,7 +990,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 206,
+              "id": 227,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "8801:7:3",
@@ -1004,12 +1004,12 @@
           },
           {
             "constant": false,
-            "id": 211,
+            "id": 232,
             "mutability": "mutable",
             "name": "nonces",
             "nameLocation": "9047:6:3",
             "nodeType": "VariableDeclaration",
-            "scope": 252,
+            "scope": 273,
             "src": "8981:72:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1018,9 +1018,9 @@
               "typeString": "mapping(bytes32 => uint256)"
             },
             "typeName": {
-              "id": 210,
+              "id": 231,
               "keyType": {
-                "id": 208,
+                "id": 229,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "8989:7:3",
@@ -1036,7 +1036,7 @@
                 "typeString": "mapping(bytes32 => uint256)"
               },
               "valueType": {
-                "id": 209,
+                "id": 230,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "9000:7:3",
@@ -1050,23 +1050,23 @@
           },
           {
             "body": {
-              "id": 229,
+              "id": 250,
               "nodeType": "Block",
               "src": "9299:81:3",
               "statements": [
                 {
                   "expression": {
-                    "id": 221,
+                    "id": 242,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 219,
+                      "id": 240,
                       "name": "vrfCoordinator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 207,
+                      "referencedDeclaration": 228,
                       "src": "9305:14:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1076,11 +1076,11 @@
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 220,
+                      "id": 241,
                       "name": "_vrfCoordinator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 214,
+                      "referencedDeclaration": 235,
                       "src": "9322:15:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1093,26 +1093,26 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 222,
+                  "id": 243,
                   "nodeType": "ExpressionStatement",
                   "src": "9305:32:3"
                 },
                 {
                   "expression": {
-                    "id": 227,
+                    "id": 248,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 223,
+                      "id": 244,
                       "name": "LINK",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 205,
+                      "referencedDeclaration": 226,
                       "src": "9343:4:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+                        "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
                         "typeString": "contract LinkTokenInterface"
                       }
                     },
@@ -1121,11 +1121,11 @@
                     "rightHandSide": {
                       "arguments": [
                         {
-                          "id": 225,
+                          "id": 246,
                           "name": "_link",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 216,
+                          "referencedDeclaration": 237,
                           "src": "9369:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -1140,18 +1140,18 @@
                             "typeString": "address"
                           }
                         ],
-                        "id": 224,
+                        "id": 245,
                         "name": "LinkTokenInterface",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 397,
+                        "referencedDeclaration": 418,
                         "src": "9350:18:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_LinkTokenInterface_$397_$",
+                          "typeIdentifier": "t_type$_t_contract$_LinkTokenInterface_$418_$",
                           "typeString": "type(contract LinkTokenInterface)"
                         }
                       },
-                      "id": 226,
+                      "id": 247,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1162,29 +1162,29 @@
                       "src": "9350:25:3",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+                        "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
                         "typeString": "contract LinkTokenInterface"
                       }
                     },
                     "src": "9343:32:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+                      "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
                       "typeString": "contract LinkTokenInterface"
                     }
                   },
-                  "id": 228,
+                  "id": 249,
                   "nodeType": "ExpressionStatement",
                   "src": "9343:32:3"
                 }
               ]
             },
             "documentation": {
-              "id": 212,
+              "id": 233,
               "nodeType": "StructuredDocumentation",
               "src": "9058:186:3",
               "text": " @param _vrfCoordinator address of VRFCoordinator contract\n @param _link address of LINK token contract\n @dev https://docs.chain.link/docs/link-token-contracts"
             },
-            "id": 230,
+            "id": 251,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -1192,17 +1192,17 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 217,
+              "id": 238,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 214,
+                  "id": 235,
                   "mutability": "mutable",
                   "name": "_vrfCoordinator",
                   "nameLocation": "9267:15:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 230,
+                  "scope": 251,
                   "src": "9259:23:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1211,7 +1211,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 213,
+                    "id": 234,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "9259:7:3",
@@ -1225,12 +1225,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 216,
+                  "id": 237,
                   "mutability": "mutable",
                   "name": "_link",
                   "nameLocation": "9292:5:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 230,
+                  "scope": 251,
                   "src": "9284:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1239,7 +1239,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 215,
+                    "id": 236,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "9284:7:3",
@@ -1255,12 +1255,12 @@
               "src": "9258:40:3"
             },
             "returnParameters": {
-              "id": 218,
+              "id": 239,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "9299:0:3"
             },
-            "scope": 252,
+            "scope": 273,
             "src": "9247:133:3",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1268,7 +1268,7 @@
           },
           {
             "body": {
-              "id": 250,
+              "id": 271,
               "nodeType": "Block",
               "src": "9653:129:3",
               "statements": [
@@ -1280,14 +1280,14 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 241,
+                        "id": 262,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "expression": {
-                            "id": 238,
+                            "id": 259,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1298,7 +1298,7 @@
                               "typeString": "msg"
                             }
                           },
-                          "id": 239,
+                          "id": 260,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1314,11 +1314,11 @@
                         "nodeType": "BinaryOperation",
                         "operator": "==",
                         "rightExpression": {
-                          "id": 240,
+                          "id": 261,
                           "name": "vrfCoordinator",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 207,
+                          "referencedDeclaration": 228,
                           "src": "9681:14:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -1333,7 +1333,7 @@
                       },
                       {
                         "hexValue": "4f6e6c7920565246436f6f7264696e61746f722063616e2066756c66696c6c",
-                        "id": 242,
+                        "id": 263,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1359,7 +1359,7 @@
                           "typeString": "literal_string \"Only VRFCoordinator can fulfill\""
                         }
                       ],
-                      "id": 237,
+                      "id": 258,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -1373,7 +1373,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 243,
+                    "id": 264,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1388,7 +1388,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 244,
+                  "id": 265,
                   "nodeType": "ExpressionStatement",
                   "src": "9659:72:3"
                 },
@@ -1396,11 +1396,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 246,
+                        "id": 267,
                         "name": "requestId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 232,
+                        "referencedDeclaration": 253,
                         "src": "9755:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -1408,11 +1408,11 @@
                         }
                       },
                       {
-                        "id": 247,
+                        "id": 268,
                         "name": "randomness",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 234,
+                        "referencedDeclaration": 255,
                         "src": "9766:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1431,18 +1431,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 245,
+                      "id": 266,
                       "name": "fulfillRandomness",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 146,
+                      "referencedDeclaration": 167,
                       "src": "9737:17:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$_t_uint256_$returns$__$",
                         "typeString": "function (bytes32,uint256)"
                       }
                     },
-                    "id": 248,
+                    "id": 269,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1457,14 +1457,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 249,
+                  "id": 270,
                   "nodeType": "ExpressionStatement",
                   "src": "9737:40:3"
                 }
               ]
             },
             "functionSelector": "94985ddd",
-            "id": 251,
+            "id": 272,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -1472,17 +1472,17 @@
             "nameLocation": "9584:20:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 235,
+              "id": 256,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 232,
+                  "id": 253,
                   "mutability": "mutable",
                   "name": "requestId",
                   "nameLocation": "9613:9:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 251,
+                  "scope": 272,
                   "src": "9605:17:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1491,7 +1491,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 231,
+                    "id": 252,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "9605:7:3",
@@ -1504,12 +1504,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 234,
+                  "id": 255,
                   "mutability": "mutable",
                   "name": "randomness",
                   "nameLocation": "9632:10:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 251,
+                  "scope": 272,
                   "src": "9624:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1518,7 +1518,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 233,
+                    "id": 254,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "9624:7:3",
@@ -1533,19 +1533,19 @@
               "src": "9604:39:3"
             },
             "returnParameters": {
-              "id": 236,
+              "id": 257,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "9653:0:3"
             },
-            "scope": 252,
+            "scope": 273,
             "src": "9575:207:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 253,
+        "scope": 274,
         "src": "5359:4425:3",
         "usedErrors": []
       }
@@ -1556,21 +1556,21 @@
     "absolutePath": "project:/node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBase.sol",
     "exportedSymbols": {
       "LinkTokenInterface": [
-        397
+        418
       ],
       "VRFConsumerBase": [
-        252
+        273
       ],
       "VRFRequestIDBase": [
-        302
+        323
       ]
     },
-    "id": 253,
+    "id": 274,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 133,
+        "id": 154,
         "literals": [
           "solidity",
           "^",
@@ -1583,11 +1583,11 @@
       {
         "absolutePath": "project:/node_modules/@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol",
         "file": "./interfaces/LinkTokenInterface.sol",
-        "id": 134,
+        "id": 155,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 253,
-        "sourceUnit": 398,
+        "scope": 274,
+        "sourceUnit": 419,
         "src": "57:45:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1595,11 +1595,11 @@
       {
         "absolutePath": "project:/node_modules/@chainlink/contracts/src/v0.8/VRFRequestIDBase.sol",
         "file": "./VRFRequestIDBase.sol",
-        "id": 135,
+        "id": 156,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 253,
-        "sourceUnit": 303,
+        "scope": 274,
+        "sourceUnit": 324,
         "src": "104:32:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1609,13 +1609,13 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 137,
+              "id": 158,
               "name": "VRFRequestIDBase",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 302,
+              "referencedDeclaration": 323,
               "src": "5396:16:3"
             },
-            "id": 138,
+            "id": 159,
             "nodeType": "InheritanceSpecifier",
             "src": "5396:16:3"
           }
@@ -1624,16 +1624,16 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "documentation": {
-          "id": 136,
+          "id": 157,
           "nodeType": "StructuredDocumentation",
           "src": "138:5220:3",
           "text": "****************************************************************************\n @notice Interface for contracts using VRF randomness\n *****************************************************************************\n @dev PURPOSE\n @dev Reggie the Random Oracle (not his real job) wants to provide randomness\n @dev to Vera the verifier in such a way that Vera can be sure he's not\n @dev making his output up to suit himself. Reggie provides Vera a public key\n @dev to which he knows the secret key. Each time Vera provides a seed to\n @dev Reggie, he gives back a value which is computed completely\n @dev deterministically from the seed and the secret key.\n @dev Reggie provides a proof by which Vera can verify that the output was\n @dev correctly computed once Reggie tells it to her, but without that proof,\n @dev the output is indistinguishable to her from a uniform random sample\n @dev from the output space.\n @dev The purpose of this contract is to make it easy for unrelated contracts\n @dev to talk to Vera the verifier about the work Reggie is doing, to provide\n @dev simple access to a verifiable source of randomness.\n *****************************************************************************\n @dev USAGE\n @dev Calling contracts must inherit from VRFConsumerBase, and can\n @dev initialize VRFConsumerBase's attributes in their constructor as\n @dev shown:\n @dev   contract VRFConsumer {\n @dev     constuctor(<other arguments>, address _vrfCoordinator, address _link)\n @dev       VRFConsumerBase(_vrfCoordinator, _link) public {\n @dev         <initialization with other arguments goes here>\n @dev       }\n @dev   }\n @dev The oracle will have given you an ID for the VRF keypair they have\n @dev committed to (let's call it keyHash), and have told you the minimum LINK\n @dev price for VRF service. Make sure your contract has sufficient LINK, and\n @dev call requestRandomness(keyHash, fee, seed), where seed is the input you\n @dev want to generate randomness from.\n @dev Once the VRFCoordinator has received and validated the oracle's response\n @dev to your request, it will call your contract's fulfillRandomness method.\n @dev The randomness argument to fulfillRandomness is the actual random value\n @dev generated from your seed.\n @dev The requestId argument is generated from the keyHash and the seed by\n @dev makeRequestId(keyHash, seed). If your contract could have concurrent\n @dev requests open, you can use the requestId to track which seed is\n @dev associated with which randomness. See VRFRequestIDBase.sol for more\n @dev details. (See \"SECURITY CONSIDERATIONS\" for principles to keep in mind,\n @dev if your contract could have multiple requests in flight simultaneously.)\n @dev Colliding `requestId`s are cryptographically impossible as long as seeds\n @dev differ. (Which is critical to making unpredictable randomness! See the\n @dev next section.)\n *****************************************************************************\n @dev SECURITY CONSIDERATIONS\n @dev A method with the ability to call your fulfillRandomness method directly\n @dev could spoof a VRF response with any random value, so it's critical that\n @dev it cannot be directly called by anything other than this base contract\n @dev (specifically, by the VRFConsumerBase.rawFulfillRandomness method).\n @dev For your users to trust that your contract's random behavior is free\n @dev from malicious interference, it's best if you can write it so that all\n @dev behaviors implied by a VRF response are executed *during* your\n @dev fulfillRandomness method. If your contract must store the response (or\n @dev anything derived from it) and use it later, you must ensure that any\n @dev user-significant behavior which depends on that stored value cannot be\n @dev manipulated by a subsequent VRF request.\n @dev Similarly, both miners and the VRF oracle itself have some influence\n @dev over the order in which VRF responses appear on the blockchain, so if\n @dev your contract could have multiple VRF requests in flight simultaneously,\n @dev you must ensure that the order in which the VRF responses arrive cannot\n @dev be used to manipulate your contract's user-significant behavior.\n @dev Since the ultimate input to the VRF is mixed with the block hash of the\n @dev block in which the request is made, user-provided seeds have no impact\n @dev on its economic security properties. They are only included for API\n @dev compatability with previous versions of this contract.\n @dev Since the block hash of the block which contains the requestRandomness\n @dev call is mixed into the input to the VRF *last*, a sufficiently powerful\n @dev miner could, in principle, fork the blockchain to evict the block\n @dev containing the request, forcing the request to be included in a\n @dev different block with a different hash, and therefore a different input\n @dev to the VRF. However, such an attack would incur a substantial economic\n @dev cost. This cost scales with the number of blocks the VRF oracle waits\n @dev until it calls responds to a request."
         },
         "fullyImplemented": false,
-        "id": 252,
+        "id": 273,
         "linearizedBaseContracts": [
-          252,
-          302
+          273,
+          323
         ],
         "name": "VRFConsumerBase",
         "nameLocation": "5377:15:3",
@@ -1641,12 +1641,12 @@
         "nodes": [
           {
             "documentation": {
-              "id": 139,
+              "id": 160,
               "nodeType": "StructuredDocumentation",
               "src": "5417:641:3",
               "text": " @notice fulfillRandomness handles the VRF response. Your contract must\n @notice implement it. See \"SECURITY CONSIDERATIONS\" above for important\n @notice principles to keep in mind when implementing your fulfillRandomness\n @notice method.\n @dev VRFConsumerBase expects its subcontracts to have a method with this\n @dev signature, and will call it once it has verified the proof\n @dev associated with the randomness. (It is triggered via a call to\n @dev rawFulfillRandomness, below.)\n @param requestId The Id initially returned by requestRandomness\n @param randomness the VRF output"
             },
-            "id": 146,
+            "id": 167,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1654,17 +1654,17 @@
             "nameLocation": "6070:17:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 144,
+              "id": 165,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 141,
+                  "id": 162,
                   "mutability": "mutable",
                   "name": "requestId",
                   "nameLocation": "6096:9:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 146,
+                  "scope": 167,
                   "src": "6088:17:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1673,7 +1673,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 140,
+                    "id": 161,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "6088:7:3",
@@ -1686,12 +1686,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 143,
+                  "id": 164,
                   "mutability": "mutable",
                   "name": "randomness",
                   "nameLocation": "6115:10:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 146,
+                  "scope": 167,
                   "src": "6107:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1700,7 +1700,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 142,
+                    "id": 163,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "6107:7:3",
@@ -1715,12 +1715,12 @@
               "src": "6087:39:3"
             },
             "returnParameters": {
-              "id": 145,
+              "id": 166,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "6143:0:3"
             },
-            "scope": 252,
+            "scope": 273,
             "src": "6061:83:3",
             "stateMutability": "nonpayable",
             "virtual": true,
@@ -1729,17 +1729,17 @@
           {
             "constant": true,
             "documentation": {
-              "id": 147,
+              "id": 168,
               "nodeType": "StructuredDocumentation",
               "src": "6148:388:3",
               "text": " @dev In order to keep backwards compatibility we have kept the user\n seed field around. We remove the use of it because given that the blockhash\n enters later, it overrides whatever randomness the used seed provides.\n Given that it adds no security, and can easily lead to misunderstandings,\n we have removed it from usage and can now provide a simpler API."
             },
-            "id": 150,
+            "id": 171,
             "mutability": "constant",
             "name": "USER_SEED_PLACEHOLDER",
             "nameLocation": "6564:21:3",
             "nodeType": "VariableDeclaration",
-            "scope": 252,
+            "scope": 273,
             "src": "6539:50:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1748,7 +1748,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 148,
+              "id": 169,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "6539:7:3",
@@ -1759,7 +1759,7 @@
             },
             "value": {
               "hexValue": "30",
-              "id": 149,
+              "id": 170,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -1777,7 +1777,7 @@
           },
           {
             "body": {
-              "id": 201,
+              "id": 222,
               "nodeType": "Block",
               "src": "7827:924:3",
               "statements": [
@@ -1785,11 +1785,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 163,
+                        "id": 184,
                         "name": "vrfCoordinator",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 207,
+                        "referencedDeclaration": 228,
                         "src": "7854:14:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1797,11 +1797,11 @@
                         }
                       },
                       {
-                        "id": 164,
+                        "id": 185,
                         "name": "_fee",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 155,
+                        "referencedDeclaration": 176,
                         "src": "7870:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1811,11 +1811,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 167,
+                            "id": 188,
                             "name": "_keyHash",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 153,
+                            "referencedDeclaration": 174,
                             "src": "7887:8:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes32",
@@ -1823,11 +1823,11 @@
                             }
                           },
                           {
-                            "id": 168,
+                            "id": 189,
                             "name": "USER_SEED_PLACEHOLDER",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 150,
+                            "referencedDeclaration": 171,
                             "src": "7897:21:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -1847,7 +1847,7 @@
                             }
                           ],
                           "expression": {
-                            "id": 165,
+                            "id": 186,
                             "name": "abi",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1858,7 +1858,7 @@
                               "typeString": "abi"
                             }
                           },
-                          "id": 166,
+                          "id": 187,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1871,7 +1871,7 @@
                             "typeString": "function () pure returns (bytes memory)"
                           }
                         },
-                        "id": 169,
+                        "id": 190,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1903,32 +1903,32 @@
                         }
                       ],
                       "expression": {
-                        "id": 160,
+                        "id": 181,
                         "name": "LINK",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 205,
+                        "referencedDeclaration": 226,
                         "src": "7833:4:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+                          "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
                           "typeString": "contract LinkTokenInterface"
                         }
                       },
-                      "id": 162,
+                      "id": 183,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "transferAndCall",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 385,
+                      "referencedDeclaration": 406,
                       "src": "7833:20:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$_t_bytes_memory_ptr_$returns$_t_bool_$",
                         "typeString": "function (address,uint256,bytes memory) external returns (bool)"
                       }
                     },
-                    "id": 170,
+                    "id": 191,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1943,23 +1943,23 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 171,
+                  "id": 192,
                   "nodeType": "ExpressionStatement",
                   "src": "7833:87:3"
                 },
                 {
                   "assignments": [
-                    173
+                    194
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 173,
+                      "id": 194,
                       "mutability": "mutable",
                       "name": "vRFSeed",
                       "nameLocation": "8159:7:3",
                       "nodeType": "VariableDeclaration",
-                      "scope": 201,
+                      "scope": 222,
                       "src": "8151:15:3",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1968,7 +1968,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 172,
+                        "id": 193,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "8151:7:3",
@@ -1980,15 +1980,15 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 185,
+                  "id": 206,
                   "initialValue": {
                     "arguments": [
                       {
-                        "id": 175,
+                        "id": 196,
                         "name": "_keyHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 153,
+                        "referencedDeclaration": 174,
                         "src": "8186:8:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -1996,11 +1996,11 @@
                         }
                       },
                       {
-                        "id": 176,
+                        "id": 197,
                         "name": "USER_SEED_PLACEHOLDER",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 150,
+                        "referencedDeclaration": 171,
                         "src": "8196:21:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -2010,14 +2010,14 @@
                       {
                         "arguments": [
                           {
-                            "id": 179,
+                            "id": 200,
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 4294967268,
                             "src": "8227:4:3",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_VRFConsumerBase_$252",
+                              "typeIdentifier": "t_contract$_VRFConsumerBase_$273",
                               "typeString": "contract VRFConsumerBase"
                             }
                           }
@@ -2025,11 +2025,11 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_VRFConsumerBase_$252",
+                              "typeIdentifier": "t_contract$_VRFConsumerBase_$273",
                               "typeString": "contract VRFConsumerBase"
                             }
                           ],
-                          "id": 178,
+                          "id": 199,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -2041,14 +2041,14 @@
                             "typeString": "type(address)"
                           },
                           "typeName": {
-                            "id": 177,
+                            "id": 198,
                             "name": "address",
                             "nodeType": "ElementaryTypeName",
                             "src": "8219:7:3",
                             "typeDescriptions": {}
                           }
                         },
-                        "id": 180,
+                        "id": 201,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2065,24 +2065,24 @@
                       },
                       {
                         "baseExpression": {
-                          "id": 181,
+                          "id": 202,
                           "name": "nonces",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 211,
+                          "referencedDeclaration": 232,
                           "src": "8234:6:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_mapping$_t_bytes32_$_t_uint256_$",
                             "typeString": "mapping(bytes32 => uint256)"
                           }
                         },
-                        "id": 183,
+                        "id": 204,
                         "indexExpression": {
-                          "id": 182,
+                          "id": 203,
                           "name": "_keyHash",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 153,
+                          "referencedDeclaration": 174,
                           "src": "8241:8:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes32",
@@ -2120,18 +2120,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 174,
+                      "id": 195,
                       "name": "makeVRFInputSeed",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 282,
+                      "referencedDeclaration": 303,
                       "src": "8169:16:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_bytes32_$_t_uint256_$_t_address_$_t_uint256_$returns$_t_uint256_$",
                         "typeString": "function (bytes32,uint256,address,uint256) pure returns (uint256)"
                       }
                     },
-                    "id": 184,
+                    "id": 205,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2151,31 +2151,31 @@
                 },
                 {
                   "expression": {
-                    "id": 194,
+                    "id": 215,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 186,
+                        "id": 207,
                         "name": "nonces",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 211,
+                        "referencedDeclaration": 232,
                         "src": "8662:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_bytes32_$_t_uint256_$",
                           "typeString": "mapping(bytes32 => uint256)"
                         }
                       },
-                      "id": 188,
+                      "id": 209,
                       "indexExpression": {
-                        "id": 187,
+                        "id": 208,
                         "name": "_keyHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 153,
+                        "referencedDeclaration": 174,
                         "src": "8669:8:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -2200,31 +2200,31 @@
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       },
-                      "id": 193,
+                      "id": 214,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "leftExpression": {
                         "baseExpression": {
-                          "id": 189,
+                          "id": 210,
                           "name": "nonces",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 211,
+                          "referencedDeclaration": 232,
                           "src": "8681:6:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_mapping$_t_bytes32_$_t_uint256_$",
                             "typeString": "mapping(bytes32 => uint256)"
                           }
                         },
-                        "id": 191,
+                        "id": 212,
                         "indexExpression": {
-                          "id": 190,
+                          "id": 211,
                           "name": "_keyHash",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 153,
+                          "referencedDeclaration": 174,
                           "src": "8688:8:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes32",
@@ -2246,7 +2246,7 @@
                       "operator": "+",
                       "rightExpression": {
                         "hexValue": "31",
-                        "id": 192,
+                        "id": 213,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -2272,7 +2272,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 195,
+                  "id": 216,
                   "nodeType": "ExpressionStatement",
                   "src": "8662:39:3"
                 },
@@ -2280,11 +2280,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 197,
+                        "id": 218,
                         "name": "_keyHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 153,
+                        "referencedDeclaration": 174,
                         "src": "8728:8:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -2292,11 +2292,11 @@
                         }
                       },
                       {
-                        "id": 198,
+                        "id": 219,
                         "name": "vRFSeed",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 173,
+                        "referencedDeclaration": 194,
                         "src": "8738:7:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -2315,18 +2315,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 196,
+                      "id": 217,
                       "name": "makeRequestId",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 301,
+                      "referencedDeclaration": 322,
                       "src": "8714:13:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_bytes32_$_t_uint256_$returns$_t_bytes32_$",
                         "typeString": "function (bytes32,uint256) pure returns (bytes32)"
                       }
                     },
-                    "id": 199,
+                    "id": 220,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2341,20 +2341,20 @@
                       "typeString": "bytes32"
                     }
                   },
-                  "functionReturnParameters": 159,
-                  "id": 200,
+                  "functionReturnParameters": 180,
+                  "id": 221,
                   "nodeType": "Return",
                   "src": "8707:39:3"
                 }
               ]
             },
             "documentation": {
-              "id": 151,
+              "id": 172,
               "nodeType": "StructuredDocumentation",
               "src": "6594:1134:3",
               "text": " @notice requestRandomness initiates a request for VRF output given _seed\n @dev The fulfillRandomness method receives the output, once it's provided\n @dev by the Oracle, and verified by the vrfCoordinator.\n @dev The _keyHash must already be registered with the VRFCoordinator, and\n @dev the _fee must exceed the fee specified during registration of the\n @dev _keyHash.\n @dev The _seed parameter is vestigial, and is kept only for API\n @dev compatibility with older versions. It can't *hurt* to mix in some of\n @dev your own randomness, here, but it's not necessary because the VRF\n @dev oracle will mix the hash of the block containing your request into the\n @dev VRF seed it ultimately uses.\n @param _keyHash ID of public key against which randomness is generated\n @param _fee The amount of LINK to send with the request\n @return requestId unique ID for this request\n @dev The returned requestId can be used to distinguish responses to\n @dev concurrent requests. It is passed as the first argument to\n @dev fulfillRandomness."
             },
-            "id": 202,
+            "id": 223,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -2362,17 +2362,17 @@
             "nameLocation": "7740:17:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 156,
+              "id": 177,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 153,
+                  "id": 174,
                   "mutability": "mutable",
                   "name": "_keyHash",
                   "nameLocation": "7766:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 202,
+                  "scope": 223,
                   "src": "7758:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2381,7 +2381,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 152,
+                    "id": 173,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "7758:7:3",
@@ -2394,12 +2394,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 155,
+                  "id": 176,
                   "mutability": "mutable",
                   "name": "_fee",
                   "nameLocation": "7784:4:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 202,
+                  "scope": 223,
                   "src": "7776:12:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2408,7 +2408,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 154,
+                    "id": 175,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "7776:7:3",
@@ -2423,17 +2423,17 @@
               "src": "7757:32:3"
             },
             "returnParameters": {
-              "id": 159,
+              "id": 180,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 158,
+                  "id": 179,
                   "mutability": "mutable",
                   "name": "requestId",
                   "nameLocation": "7816:9:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 202,
+                  "scope": 223,
                   "src": "7808:17:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2442,7 +2442,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 157,
+                    "id": 178,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "7808:7:3",
@@ -2456,7 +2456,7 @@
               ],
               "src": "7807:19:3"
             },
-            "scope": 252,
+            "scope": 273,
             "src": "7731:1020:3",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -2464,33 +2464,33 @@
           },
           {
             "constant": false,
-            "id": 205,
+            "id": 226,
             "mutability": "immutable",
             "name": "LINK",
             "nameLocation": "8793:4:3",
             "nodeType": "VariableDeclaration",
-            "scope": 252,
+            "scope": 273,
             "src": "8755:42:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+              "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
               "typeString": "contract LinkTokenInterface"
             },
             "typeName": {
-              "id": 204,
+              "id": 225,
               "nodeType": "UserDefinedTypeName",
               "pathNode": {
-                "id": 203,
+                "id": 224,
                 "name": "LinkTokenInterface",
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 397,
+                "referencedDeclaration": 418,
                 "src": "8755:18:3"
               },
-              "referencedDeclaration": 397,
+              "referencedDeclaration": 418,
               "src": "8755:18:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+                "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
                 "typeString": "contract LinkTokenInterface"
               }
             },
@@ -2498,12 +2498,12 @@
           },
           {
             "constant": false,
-            "id": 207,
+            "id": 228,
             "mutability": "immutable",
             "name": "vrfCoordinator",
             "nameLocation": "8827:14:3",
             "nodeType": "VariableDeclaration",
-            "scope": 252,
+            "scope": 273,
             "src": "8801:40:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -2512,7 +2512,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 206,
+              "id": 227,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "8801:7:3",
@@ -2526,12 +2526,12 @@
           },
           {
             "constant": false,
-            "id": 211,
+            "id": 232,
             "mutability": "mutable",
             "name": "nonces",
             "nameLocation": "9047:6:3",
             "nodeType": "VariableDeclaration",
-            "scope": 252,
+            "scope": 273,
             "src": "8981:72:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -2540,9 +2540,9 @@
               "typeString": "mapping(bytes32 => uint256)"
             },
             "typeName": {
-              "id": 210,
+              "id": 231,
               "keyType": {
-                "id": 208,
+                "id": 229,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "8989:7:3",
@@ -2558,7 +2558,7 @@
                 "typeString": "mapping(bytes32 => uint256)"
               },
               "valueType": {
-                "id": 209,
+                "id": 230,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "9000:7:3",
@@ -2572,23 +2572,23 @@
           },
           {
             "body": {
-              "id": 229,
+              "id": 250,
               "nodeType": "Block",
               "src": "9299:81:3",
               "statements": [
                 {
                   "expression": {
-                    "id": 221,
+                    "id": 242,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 219,
+                      "id": 240,
                       "name": "vrfCoordinator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 207,
+                      "referencedDeclaration": 228,
                       "src": "9305:14:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -2598,11 +2598,11 @@
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 220,
+                      "id": 241,
                       "name": "_vrfCoordinator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 214,
+                      "referencedDeclaration": 235,
                       "src": "9322:15:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -2615,26 +2615,26 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 222,
+                  "id": 243,
                   "nodeType": "ExpressionStatement",
                   "src": "9305:32:3"
                 },
                 {
                   "expression": {
-                    "id": 227,
+                    "id": 248,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 223,
+                      "id": 244,
                       "name": "LINK",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 205,
+                      "referencedDeclaration": 226,
                       "src": "9343:4:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+                        "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
                         "typeString": "contract LinkTokenInterface"
                       }
                     },
@@ -2643,11 +2643,11 @@
                     "rightHandSide": {
                       "arguments": [
                         {
-                          "id": 225,
+                          "id": 246,
                           "name": "_link",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 216,
+                          "referencedDeclaration": 237,
                           "src": "9369:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -2662,18 +2662,18 @@
                             "typeString": "address"
                           }
                         ],
-                        "id": 224,
+                        "id": 245,
                         "name": "LinkTokenInterface",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 397,
+                        "referencedDeclaration": 418,
                         "src": "9350:18:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_LinkTokenInterface_$397_$",
+                          "typeIdentifier": "t_type$_t_contract$_LinkTokenInterface_$418_$",
                           "typeString": "type(contract LinkTokenInterface)"
                         }
                       },
-                      "id": 226,
+                      "id": 247,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2684,29 +2684,29 @@
                       "src": "9350:25:3",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+                        "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
                         "typeString": "contract LinkTokenInterface"
                       }
                     },
                     "src": "9343:32:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_LinkTokenInterface_$397",
+                      "typeIdentifier": "t_contract$_LinkTokenInterface_$418",
                       "typeString": "contract LinkTokenInterface"
                     }
                   },
-                  "id": 228,
+                  "id": 249,
                   "nodeType": "ExpressionStatement",
                   "src": "9343:32:3"
                 }
               ]
             },
             "documentation": {
-              "id": 212,
+              "id": 233,
               "nodeType": "StructuredDocumentation",
               "src": "9058:186:3",
               "text": " @param _vrfCoordinator address of VRFCoordinator contract\n @param _link address of LINK token contract\n @dev https://docs.chain.link/docs/link-token-contracts"
             },
-            "id": 230,
+            "id": 251,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -2714,17 +2714,17 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 217,
+              "id": 238,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 214,
+                  "id": 235,
                   "mutability": "mutable",
                   "name": "_vrfCoordinator",
                   "nameLocation": "9267:15:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 230,
+                  "scope": 251,
                   "src": "9259:23:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2733,7 +2733,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 213,
+                    "id": 234,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "9259:7:3",
@@ -2747,12 +2747,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 216,
+                  "id": 237,
                   "mutability": "mutable",
                   "name": "_link",
                   "nameLocation": "9292:5:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 230,
+                  "scope": 251,
                   "src": "9284:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2761,7 +2761,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 215,
+                    "id": 236,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "9284:7:3",
@@ -2777,12 +2777,12 @@
               "src": "9258:40:3"
             },
             "returnParameters": {
-              "id": 218,
+              "id": 239,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "9299:0:3"
             },
-            "scope": 252,
+            "scope": 273,
             "src": "9247:133:3",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -2790,7 +2790,7 @@
           },
           {
             "body": {
-              "id": 250,
+              "id": 271,
               "nodeType": "Block",
               "src": "9653:129:3",
               "statements": [
@@ -2802,14 +2802,14 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 241,
+                        "id": 262,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "expression": {
-                            "id": 238,
+                            "id": 259,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2820,7 +2820,7 @@
                               "typeString": "msg"
                             }
                           },
-                          "id": 239,
+                          "id": 260,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2836,11 +2836,11 @@
                         "nodeType": "BinaryOperation",
                         "operator": "==",
                         "rightExpression": {
-                          "id": 240,
+                          "id": 261,
                           "name": "vrfCoordinator",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 207,
+                          "referencedDeclaration": 228,
                           "src": "9681:14:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -2855,7 +2855,7 @@
                       },
                       {
                         "hexValue": "4f6e6c7920565246436f6f7264696e61746f722063616e2066756c66696c6c",
-                        "id": 242,
+                        "id": 263,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -2881,7 +2881,7 @@
                           "typeString": "literal_string \"Only VRFCoordinator can fulfill\""
                         }
                       ],
-                      "id": 237,
+                      "id": 258,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -2895,7 +2895,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 243,
+                    "id": 264,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2910,7 +2910,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 244,
+                  "id": 265,
                   "nodeType": "ExpressionStatement",
                   "src": "9659:72:3"
                 },
@@ -2918,11 +2918,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 246,
+                        "id": 267,
                         "name": "requestId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 232,
+                        "referencedDeclaration": 253,
                         "src": "9755:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -2930,11 +2930,11 @@
                         }
                       },
                       {
-                        "id": 247,
+                        "id": 268,
                         "name": "randomness",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 234,
+                        "referencedDeclaration": 255,
                         "src": "9766:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -2953,18 +2953,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 245,
+                      "id": 266,
                       "name": "fulfillRandomness",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 146,
+                      "referencedDeclaration": 167,
                       "src": "9737:17:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$_t_uint256_$returns$__$",
                         "typeString": "function (bytes32,uint256)"
                       }
                     },
-                    "id": 248,
+                    "id": 269,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2979,14 +2979,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 249,
+                  "id": 270,
                   "nodeType": "ExpressionStatement",
                   "src": "9737:40:3"
                 }
               ]
             },
             "functionSelector": "94985ddd",
-            "id": 251,
+            "id": 272,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -2994,17 +2994,17 @@
             "nameLocation": "9584:20:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 235,
+              "id": 256,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 232,
+                  "id": 253,
                   "mutability": "mutable",
                   "name": "requestId",
                   "nameLocation": "9613:9:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 251,
+                  "scope": 272,
                   "src": "9605:17:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3013,7 +3013,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 231,
+                    "id": 252,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "9605:7:3",
@@ -3026,12 +3026,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 234,
+                  "id": 255,
                   "mutability": "mutable",
                   "name": "randomness",
                   "nameLocation": "9632:10:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 251,
+                  "scope": 272,
                   "src": "9624:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3040,7 +3040,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 233,
+                    "id": 254,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "9624:7:3",
@@ -3055,19 +3055,19 @@
               "src": "9604:39:3"
             },
             "returnParameters": {
-              "id": 236,
+              "id": 257,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "9653:0:3"
             },
-            "scope": 252,
+            "scope": 273,
             "src": "9575:207:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 253,
+        "scope": 274,
         "src": "5359:4425:3",
         "usedErrors": []
       }
@@ -3080,7 +3080,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2021-12-27T14:53:26.797Z",
+  "updatedAt": "2021-12-28T04:34:25.372Z",
   "devdoc": {
     "details": "PURPOSEReggie the Random Oracle (not his real job) wants to provide randomnessto Vera the verifier in such a way that Vera can be sure he's notmaking his output up to suit himself. Reggie provides Vera a public keyto which he knows the secret key. Each time Vera provides a seed toReggie, he gives back a value which is computed completelydeterministically from the seed and the secret key.Reggie provides a proof by which Vera can verify that the output wascorrectly computed once Reggie tells it to her, but without that proof,the output is indistinguishable to her from a uniform random samplefrom the output space.The purpose of this contract is to make it easy for unrelated contractsto talk to Vera the verifier about the work Reggie is doing, to providesimple access to a verifiable source of randomness. *****************************************************************************USAGECalling contracts must inherit from VRFConsumerBase, and caninitialize VRFConsumerBase's attributes in their constructor asshown:contract VRFConsumer {constuctor(<other arguments>, address _vrfCoordinator, address _link)VRFConsumerBase(_vrfCoordinator, _link) public {<initialization with other arguments goes here>}}The oracle will have given you an ID for the VRF keypair they havecommitted to (let's call it keyHash), and have told you the minimum LINKprice for VRF service. Make sure your contract has sufficient LINK, andcall requestRandomness(keyHash, fee, seed), where seed is the input youwant to generate randomness from.Once the VRFCoordinator has received and validated the oracle's responseto your request, it will call your contract's fulfillRandomness method.The randomness argument to fulfillRandomness is the actual random valuegenerated from your seed.The requestId argument is generated from the keyHash and the seed bymakeRequestId(keyHash, seed). If your contract could have concurrentrequests open, you can use the requestId to track which seed isassociated with which randomness. See VRFRequestIDBase.sol for moredetails. (See \"SECURITY CONSIDERATIONS\" for principles to keep in mind,if your contract could have multiple requests in flight simultaneously.)Colliding `requestId`s are cryptographically impossible as long as seedsdiffer. (Which is critical to making unpredictable randomness! See thenext section.) *****************************************************************************SECURITY CONSIDERATIONSA method with the ability to call your fulfillRandomness method directlycould spoof a VRF response with any random value, so it's critical thatit cannot be directly called by anything other than this base contract(specifically, by the VRFConsumerBase.rawFulfillRandomness method).For your users to trust that your contract's random behavior is freefrom malicious interference, it's best if you can write it so that allbehaviors implied by a VRF response are executed *during* yourfulfillRandomness method. If your contract must store the response (oranything derived from it) and use it later, you must ensure that anyuser-significant behavior which depends on that stored value cannot bemanipulated by a subsequent VRF request.Similarly, both miners and the VRF oracle itself have some influenceover the order in which VRF responses appear on the blockchain, so ifyour contract could have multiple VRF requests in flight simultaneously,you must ensure that the order in which the VRF responses arrive cannotbe used to manipulate your contract's user-significant behavior.Since the ultimate input to the VRF is mixed with the block hash of theblock in which the request is made, user-provided seeds have no impacton its economic security properties. They are only included for APIcompatability with previous versions of this contract.Since the block hash of the block which contains the requestRandomnesscall is mixed into the input to the VRF *last*, a sufficiently powerfulminer could, in principle, fork the blockchain to evict the blockcontaining the request, forcing the request to be included in adifferent block with a different hash, and therefore a different inputto the VRF. However, such an attack would incur a substantial economiccost. This cost scales with the number of blocks the VRF oracle waitsuntil it calls responds to a request.",
     "kind": "dev",
